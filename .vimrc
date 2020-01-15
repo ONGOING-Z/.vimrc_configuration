@@ -85,6 +85,9 @@ Plug 'chrisbra/csv.vim'
 " Surroundings
 Plug 'tpope/vim-surround'
 
+" NERDTree
+Plug 'scrooloose/nerdtree'
+
 call plug#end()
 
 " Statusline
