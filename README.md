@@ -1,4 +1,4 @@
-# Save-My-Vimrc
+# Vimrc Configuration
 用于保存个人vim偏好设置
 
 ### vim插件管理
