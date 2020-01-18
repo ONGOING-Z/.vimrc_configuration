@@ -1,5 +1,5 @@
 # Vimrc Configuration
-用于保存个人vim偏好设置
+保存自己的.vimrc设置
 
 ### vim插件管理
 `vim-plug`
