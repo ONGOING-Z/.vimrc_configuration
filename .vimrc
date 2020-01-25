@@ -88,6 +88,9 @@ Plug 'tpope/vim-surround'
 " NERDTree
 Plug 'scrooloose/nerdtree'
 
+" 折叠
+Plug 'tmhedberg/SimpylFold'
+
 call plug#end()
 
 " Statusline
@@ -128,3 +131,9 @@ colorscheme gruvbox
 " insert into now time
 iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
 iab xdate <c-r>=strftime("%Y-%m-%d %a %Y年%j天")<cr>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
