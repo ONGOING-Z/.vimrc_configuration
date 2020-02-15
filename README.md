@@ -3,7 +3,7 @@
 
 ### vim插件管理
 `vim-plug`
-1. 安装
+1. `linux`下安装
 ```
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
@@ -55,4 +55,8 @@ gg
 - 到最后一行
 ```
 shift + g
+```
+10. 查看寄存器
+```
+:reg
 ```
