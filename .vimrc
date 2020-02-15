@@ -4,6 +4,7 @@ set showmatch
 
 " 编码
 "set encoding = 'utf-8'
+set fencs=utf-8,GB18030,ucs-bom,default,latin1
 
 " 搜索高亮
 set hlsearch
@@ -85,11 +86,9 @@ Plug 'chrisbra/csv.vim'
 " Surroundings
 Plug 'tpope/vim-surround'
 
-" NERDTree
-Plug 'scrooloose/nerdtree'
-
-" 折叠
-Plug 'tmhedberg/SimpylFold'
+" Git
+Plug 'gregsexton/gitv', {'on': ['Gitv']}
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -122,7 +121,6 @@ let g:syntastic_check_on_wq = 0
 "高亮错误
 let g:syntastic_enable_highlighting=1
 
-
 " Tagbar
 nmap <F8> : TagbarToggle<CR>
 colorscheme gruvbox
@@ -132,8 +130,35 @@ colorscheme gruvbox
 iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
 iab xdate <c-r>=strftime("%Y-%m-%d %a %Y年%j天")<cr>
 
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
-" Enable folding with the spacebar
-nnoremap <space> za
+" 显示空格并以红色高亮（暂时不用)
+"highlight WhitespaceEOL ctermbg=red guibg=red 
+"match WhitespaceEOL /\s\+$/
+
+" Set updatetime
+set updatetime=100
+" GitGutter Config
+let g:gitgutter_max_signs = 500  " default value
+
+" GitGutter gitstatus()
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+set statusline+=%{GitStatus()}
+
+" 在旁边高亮未修改部分
+"let g:gitgutter_override_sign_column_highlight = 0
+"highlight SignColumn ctermbg=green
+
+" GitGutter Signs' colors and symbols
+highlight GitGutterAdd    guifg=#009900 guibg=#073642 ctermfg=2 ctermbg=0
+highlight GitGutterChange guifg=#bbbb00 guibg=#073642 ctermfg=3 ctermbg=0
+highlight GitGutterDelete guifg=#FF0000 guibg=#073642 ctermfg=1 ctermbg=0
+
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = '+'
+let g:gitgutter_sign_removed = '--'
+let g:gitgutter_sign_removed_first_line = 'r'
+let g:gitgutter_sign_modified_removed = 'w'
+
+highlight link GitGutterChangeLine DiffText
