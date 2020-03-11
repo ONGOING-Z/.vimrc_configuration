@@ -71,10 +71,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Syntastic
-Plug 'vim-syntastic/syntastic', { 'for': ['c', 'c++'] }
+Plug 'vim-syntastic/syntastic'
 
 " Tagbar
-Plug 'majutsushi/tagbar', { 'for': ['c', 'c++'] }
+Plug 'majutsushi/tagbar'
 
 " 由于此插件太多庞大，一次安装并没有成功，未安装成功每次开启vim都会提示，就将之卸载
 " YouCompleteMe
@@ -89,6 +89,10 @@ Plug 'tpope/vim-surround'
 
 " debug
 "Plug 'puremourning/vimspector'  " 20.3.8
+" 对齐线
+Plug 'Yggdroot/indentLine'  " 20.3.8
+" auto pairs
+Plug 'jiangmiao/auto-pairs'  " 20.3.9
 call plug#end()
 
 " Statusline
@@ -135,18 +139,6 @@ iab xdate <c-r>=strftime("%Y-%m-%d %a %Y年%j天")<cr>
 "highlight WhitespaceEOL ctermbg=red guibg=red 
 "match WhitespaceEOL /\s\+$/
 
-" Set updatetime
-set updatetime=100
-" GitGutter Config
-let g:gitgutter_max_signs = 500  " default value
-
-" GitGutter gitstatus()
-function! GitStatus()
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return printf('+%d ~%d -%d', a, m, r)
-endfunction
-set statusline+=%{GitStatus()}
-
 " 在旁边高亮未修改部分
 "let g:gitgutter_override_sign_column_highlight = 0
 "highlight SignColumn ctermbg=green
@@ -161,11 +153,5 @@ set statusline+=%{GitStatus()}
 "let g:gitgutter_sign_removed = '--'
 "let g:gitgutter_sign_removed_first_line = 'r'
 "let g:gitgutter_sign_modified_removed = 'w'
-"
-"highlight link GitGutterChangeLine DiffText
-"
-let g:cssColorVimDoNotMessMyUpdatetime = 1
 
-" 自动补全括号 <20.3.1>
-inoremap [ []<ESC>i
-inoremap " ""<ESC>i
+let g:indentLine_color_term = 239
