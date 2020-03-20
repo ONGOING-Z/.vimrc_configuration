@@ -1,15 +1,11 @@
+" vimrc
+" 1. 单行注释写在配置右侧
 set number
-" 显示匹配的括号
-set showmatch
+set showmatch                                   " 显示匹配的括号
+set fencs=utf-8,GB18030,ucs-bom,default,latin1  " 编码
+set hlsearch                                    " 搜索高亮
 
-" 编码
-"set encoding = 'utf-8'
-set fencs=utf-8,GB18030,ucs-bom,default,latin1
-
-" 搜索高亮
-set hlsearch
-
-" 如果一个文件中既包含 LINUX 也包含 linux，在开启智能大小写搜索功能时，如果使用 /LINUX 进行搜索，只有单词 LINUX 处会被搜到。反之，如果搜索 /linux，那么不论大小写的搜索结果都会被匹配
+" 搜索时忽略大小写
 set ignorecase
 set smartcase
 
@@ -17,11 +13,10 @@ set smartcase
 syntax enable
 syntax on
 
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
+set list listchars=tab:»·,trail:· " Display extra whitespace
 
-" 将下列命令取消的原因：由于一些txt文件的每行都很长，将每行的长度限制了反而不容易查看
-" Make it obvious where 100 characters is
+" 将下列命令取消的原因:
+" 由于一些txt文件的每行都很长，将每行的长度限制了反而不容易查看
 set textwidth=80
 set colorcolumn=1
 
@@ -51,23 +46,14 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 " Vim-Plug
 call plug#begin()
 Plug 'morhetz/gruvbox'
-
-" Git
-"Plug 'tpope/vim-fugitive'
-"Plug 'junegunn/gv.vim'
-
 " Statusline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-syntastic/syntastic' " 语法检查
+Plug 'majutsushi/tagbar' " 显示代码中的变量和函数
 
-" Syntastic
-Plug 'vim-syntastic/syntastic'
-
-" Tagbar
-Plug 'majutsushi/tagbar'
-
-" 由于此插件太多庞大，一次安装并没有成功，未安装成功每次开启vim都会提示，就将之卸载
-" YouCompleteMe
+" 由于此插件太多庞大，一次安装并没有成功，未安装成功每次开启vim都会提示，
+" 就将之卸载。
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Surroundings
@@ -79,54 +65,56 @@ Plug 'tpope/vim-surround'
 
 " debug
 "Plug 'puremourning/vimspector'  " 20.3.8
-" 对齐线
-Plug 'Yggdroot/indentLine'  " 20.3.8
-" auto pairs
+Plug 'Yggdroot/indentLine'   " 20.3.8 对齐线
 Plug 'jiangmiao/auto-pairs'  " 20.3.9
-" vim notes
 Plug 'xolox/vim-notes'
-" 安装vim-note必须安装misc
-Plug 'xolox/vim-misc'
-" vim calendar
+Plug 'xolox/vim-misc'        " 安装vim-note必须安装misc
 Plug 'itchyny/calendar.vim'
-" vimwiki
 Plug 'vimwiki/vimwiki'
+Plug 'Yggdroot/LeaderF'      "20.3.14
+Plug 'RRethy/vim-illuminate' "20.3.16  高亮鼠标所在相同单词
+Plug 'tpope/vim-fugitive'    "20.3.20 Git
 call plug#end()
 
-" Statusline
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_wq = 0
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
 
-"syntastic
-"设置error和warning的标志 
+" Statusline
+let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" syntastic
+" error/warning的图标 
 let g:syntastic_enable_signs = 1 
 let g:syntastic_error_symbol='✗' 
-let g:syntastic_warning_symbol='►' 
-"总是打开Location List（相当于QuickFix）窗口，如果你发现syntastic因为与其他插件冲突而经常崩溃，将下面选项置0
+"let g:syntastic_warning_symbol='►'
+let g:syntastic_warning_symbol='⚠ '
+" 总是打开Location List（相当于QuickFix）窗口，如果你发现syntastic因为与其他
+" 插件冲突而经常崩溃，将下面选项置0
 let g:syntastic_always_populate_loc_list = 1
-"自动打开Locaton List，默认值为2，表示发现错误时不自动打开，当修正以后没有再发现错误时自动关闭，置1表示自动打开自动关闭，0表示关闭自动打开和自动关闭，3表示自动打开，但不自动关闭 
+" 自动打开Locaton List，默认值为2，表示发现错误时不自动打开，当修正以后没有再
+" 发现错误时自动关闭，置1表示自动打开自动关闭，0表示关闭自动打开和自动关闭，
+" 3表示自动打开，但不自动关闭 
 let g:syntastic_auto_loc_list = 1 
-"修改Locaton List窗口高度
-"let g:syntastic_loc_list_height = 5
-"打开文件时自动进行检查 
+" 修改Locaton List窗口高度
+" let g:syntastic_loc_list_height = 5
+" 打开文件时自动进行检查 
 let g:syntastic_check_on_open = 1 
-"自动跳转到发现的第一个错误或警告处[not ok, 自动跳转很不好]
-"let g:syntastic_auto_jump = 1
-"进行实时检查，如果觉得卡顿，将下面的选项置为1 
+" 自动跳转到发现的第一个错误或警告处[not ok, 自动跳转很不好]
+" let g:syntastic_auto_jump = 1
+" 进行实时检查，如果觉得卡顿，将下面的选项置为1 
 let g:syntastic_check_on_wq = 0 
-"高亮错误
+" 高亮错误
 let g:syntastic_enable_highlighting=1
 
 " Tagbar
 nmap <F8> : TagbarToggle<CR>
-" 背景颜色及主题样式
-colorscheme gruvbox
-set background=dark
+
+colorscheme gruvbox " 主题样式
+set background=dark " 背景颜色
 
 " iab用于编辑模式，实现替换功能
 " insert into now time
@@ -153,4 +141,38 @@ iab xdate <c-r>=strftime("%Y-%m-%d %a %Y年%j天")<cr>
 "let g:gitgutter_sign_modified_removed = 'w'
 
 let g:indentLine_color_term = 239
-set cc=80
+set cc=80 " 在80个字符处显示竖线"
+" Leaderf
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+
+" F7键编译cpp文件 20.3.16
+map <F7> :call CompileGcc()<CR>
+func! CompileGcc()
+    if &filetype == 'cpp'
+        exec "!time g++ -Wall % -o %<"
+    endif
+    if &filetype == 'c'
+        exec "!time gcc -Wall % -o %<"
+    endif
+endfunc
+" F9运行已经编译好的文件 20.3.16
+map <F9> :call RunGcc()<CR>
+func! RunGcc()
+    if &filetype == 'cpp'
+        exec "!time ./%<"
+    endif
+    if &filetype == 'c'
+        exec "!time ./%<"
+    endif
+endfunc
+
+" 虚拟行与屏幕行
+" 当在vim中显示的一行很长的时候，在屏幕上显示了几行，使用
+" 下面设置可以和正常jk移动相同，在行内上下移动。20.3.16
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+set title    " 在标签页上显示文件名称
+set showcmd
+set autoread " 当文件在外部被改变时，Vim自动更新载入
