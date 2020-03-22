@@ -1,4 +1,6 @@
-" vimrc
+" =============================================================================
+"                                      vimrc
+" =============================================================================
 " 1. 单行注释写在配置右侧
 set number
 set showmatch                                   " 显示匹配的括号
@@ -65,15 +67,16 @@ Plug 'tpope/vim-surround'
 
 " debug
 "Plug 'puremourning/vimspector'  " 20.3.8
-Plug 'Yggdroot/indentLine'   " 20.3.8 对齐线
-Plug 'jiangmiao/auto-pairs'  " 20.3.9
+Plug 'Yggdroot/indentLine'     " 20.3.8 对齐线
+Plug 'jiangmiao/auto-pairs'    " 20.3.9
 Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'        " 安装vim-note必须安装misc
+Plug 'xolox/vim-misc'          " 安装vim-note必须安装misc
 Plug 'itchyny/calendar.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'Yggdroot/LeaderF'      "20.3.14
-Plug 'RRethy/vim-illuminate' "20.3.16  高亮鼠标所在相同单词
-Plug 'tpope/vim-fugitive'    "20.3.20 Git
+Plug 'Yggdroot/LeaderF'        "20.3.14
+Plug 'RRethy/vim-illuminate'   "20.3.16  高亮鼠标所在相同单词
+Plug 'tpope/vim-fugitive'      "20.3.20 Git
+Plug 'preservim/nerdcommenter' "20.3.20 各种注释
 call plug#end()
 
 
@@ -114,31 +117,12 @@ let g:syntastic_enable_highlighting=1
 nmap <F8> : TagbarToggle<CR>
 
 colorscheme gruvbox " 主题样式
-set background=dark " 背景颜色
+set background=dark " set dark scheme 背景颜色
 
 " iab用于编辑模式，实现替换功能
 " insert into now time
 iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
 iab xdate <c-r>=strftime("%Y-%m-%d %a %Y年%j天")<cr>
-
-" 显示空格并以红色高亮（暂时不用)
-"highlight WhitespaceEOL ctermbg=red guibg=red 
-"match WhitespaceEOL /\s\+$/
-
-" 在旁边高亮未修改部分
-"let g:gitgutter_override_sign_column_highlight = 0
-"highlight SignColumn ctermbg=green
-
-" GitGutter Signs' colors and symbols
-"highlight GitGutterAdd    guifg=#009900 guibg=#073642 ctermfg=2 ctermbg=0
-"highlight GitGutterChange guifg=#bbbb00 guibg=#073642 ctermfg=3 ctermbg=0
-"highlight GitGutterDelete guifg=#FF0000 guibg=#073642 ctermfg=1 ctermbg=0
-
-"let g:gitgutter_sign_added = '++'
-"let g:gitgutter_sign_modified = '+'
-"let g:gitgutter_sign_removed = '--'
-"let g:gitgutter_sign_removed_first_line = 'r'
-"let g:gitgutter_sign_modified_removed = 'w'
 
 let g:indentLine_color_term = 239
 set cc=80 " 在80个字符处显示竖线"
@@ -176,3 +160,30 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 set title    " 在标签页上显示文件名称
 set showcmd
 set autoread " 当文件在外部被改变时，Vim自动更新载入
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+" =============================================================================
+"                                暂时注释不用
+" =============================================================================
+" 
+" 显示空格并以红色高亮（暂时不用)
+"highlight WhitespaceEOL ctermbg=red guibg=red 
+"match WhitespaceEOL /\s\+$/
+
+" 在旁边高亮未修改部分
+"let g:gitgutter_override_sign_column_highlight = 0
+"highlight SignColumn ctermbg=green
+
+" GitGutter Signs' colors and symbols
+"highlight GitGutterAdd    guifg=#009900 guibg=#073642 ctermfg=2 ctermbg=0
+"highlight GitGutterChange guifg=#bbbb00 guibg=#073642 ctermfg=3 ctermbg=0
+"highlight GitGutterDelete guifg=#FF0000 guibg=#073642 ctermfg=1 ctermbg=0
+
+"let g:gitgutter_sign_added = '++'
+"let g:gitgutter_sign_modified = '+'
+"let g:gitgutter_sign_removed = '--'
+"let g:gitgutter_sign_removed_first_line = 'r'
+"let g:gitgutter_sign_modified_removed = 'w'
